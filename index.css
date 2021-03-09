@@ -2,7 +2,7 @@ body{
   background-color: #ecf0f1;
 }
 .btn{
-  curcor: pointer;
+  cursor: pointer;
 }
 h1{
   color:#34495e;
@@ -11,4 +11,13 @@ h1{
 
 .clicked{
   color: #7f8c8d;
+}
+
+.form,
+.greetings {
+  display: none;
+}
+
+.showing{
+  display: block;
 }
