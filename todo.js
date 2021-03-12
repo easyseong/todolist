@@ -4,7 +4,18 @@ const toDoForm = document.querySelector(".js-toDoForm"),
 
 const TODOS_LS = "toDos";
 
-const toDos = [];
+let toDos = [];
+
+function deleteToDo(event){//event를 넣는 이유뭐냐
+  const btn = event.target;
+  const li = btn.parentNode; //event.target.parentNode
+  toDoList.removeChild(li);
+  const cleanToDos = toDos.filter(function(toDo){
+    return toDo.id !== parseInt(li.id);//parseInt 스트링을 숫자로
+  }); //filterFn 함수가 배열 안의 모든 toDos을 통과한다. 그리고 ㅅtrue인 toDos만 return 한다.
+  toDos = cleanToDos;
+  saveToDos();
+}
 
 function saveToDos(){
   localStorage.setItem(TODOS_LS, JSON.stringify(toDos)); //뭐냐 이거???? 리스트의 값을 TODOS_LS에 저장
@@ -16,6 +27,7 @@ function paintToDo(text){
   const span = document.createElement("span");
   const newId = toDos.length+1;
   delBtn.innerText = "❌";
+  delBtn.addEventListener("click", deleteToDo); //버튼이 눌리는 것을 인식
   span.innerText = text;
   li.appendChild(delBtn);
   li.appendChild(span);  //뭔가를 그의 father element안에 넣는다
@@ -27,8 +39,6 @@ function paintToDo(text){
   };
   toDos.push(toDoObj); // push를 써서 array안에 element하나(여기서는 toDoObj)를 넣어줄 수 있다.
   saveToDos();
-
-
 }
 
 function handleSubmit(event){
